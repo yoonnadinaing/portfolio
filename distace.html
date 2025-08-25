@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Distance from University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding-top: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>How far from University?</h1>
+    <button onclick="getDistance()">Where am I?</button>
+    <p id="output"></p>
+
+    <a href="javascript:history.back()" class="back-button">⬅ Back</a>
+
+    <script>
+        // Coordinates of Kasem Bundit University (Main Campus)
+        const universityLat = 13.805392901238022;
+        const universityLng = 100.73962177144537;
+
+        function getDistance() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showDistance, showError);
+            } else {
+                document.getElementById("output").innerText = "Geolocation is not supported by your browser.";
+            }
+        }
+
+        function showDistance(position) {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+
+            // Convert degrees to radians
+            const toRad = (deg) => deg * Math.PI / 180;
+
+            const R = 6371; // Radius of Earth in km
+            const dLat = toRad(universityLat - userLat);
+            const dLng = toRad(universityLng - userLng);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(toRad(userLat)) * Math.cos(toRad(universityLat)) *
+                      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c;
+
+            document.getElementById("output").innerText = 
+                `You're ${distance.toFixed(2)} km away from the Kasem Bundit University.`;
+        }
+
+        function showError(error) {
+            let message = "Unable to retrieve your location.";
+            if (error.code === error.PERMISSION_DENIED) {
+                message = "Permission denied. Please allow location access.";
+            }
+            document.getElementById("output").innerText = message;
+        }
+    </script>
+
+</body>
+</html>

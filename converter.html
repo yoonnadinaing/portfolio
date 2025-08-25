@@ -1,0 +1,61 @@
+<!DOCTYPE 
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Unit Converter</title>
+    <style>
+       body{
+        background-color: antiquewhite;
+        padding: 60px;
+        text-align: center;
+       }
+       .converter{
+        background-color: white;
+        display: inline-block;
+        padding: 25px;
+        border-radius: 20%;
+       }
+       input{
+        padding: 10px;
+        margin: 10px;
+       }
+
+    </style>
+</head>
+
+<body>
+    
+    <h1>Area Converter</h1>
+
+    <div class="converter">
+        <label for="squareMeter">From Square Meters-</label>
+        <br>
+        <input type="number" id="squareMeter" placeholder="Enter Area..">
+        <br>
+        <button onclick="ConvertArea()">Convert to Squarefeet</button>
+        
+        <p id="result">Your Result will appear here..</p>
+    </div>
+
+    <a href="javascript:history.back()" class="back-button">⬅ Back</a>
+
+    <script>
+       
+        function ConvertArea() {
+            let sqm = parseFloat(document.getElementById("squareMeter").value);
+            if (isNaN(sqm)) {
+                document.getElementById("result").innerHTML = "Please enter a valid number."
+                return;
+            } else {
+                var sqft = sqm * 10.7639;
+                var result = sqft.toFixed(2)
+                document.getElementById("result").innerHTML = `${sqm} m² = ${result} ft²`
+            }
+            
+            }
+            
+            
+    </script>
+    
+</body>
+</html>

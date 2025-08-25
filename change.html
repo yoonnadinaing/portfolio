@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculate Change</title>
+  <style>
+    body {
+      margin: 40px;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    input[type="number"] {
+      width: 80px;
+      padding: 5px;
+    }
+    button {
+      padding: 5px 10px;
+      margin-left: 5px;
+    }
+    .result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculate Change</h1>
+  <p>Enter Amount:</p> 
+  <input type="number" id="amount" />
+  <button onclick="calculateChange()">Submit</button>
+  <div class="result" id="result"></div>
+
+  <a href="javascript:history.back()" class="back-button">⬅ Back</a>
+
+  <script>
+    function calculateChange() {
+      const denominations = [500, 100, 50, 20, 1];
+      let amount = parseInt(document.getElementById("amount").value);
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
+        if (amount <= 0) {
+            resultDiv.innerHTML += 'Please enter a valid amount'
+            return 
+        } 
+      for (let i = 0; i < denominations.length; i++) {
+        let count = Math.floor(amount / denominations[i]);
+        if (count > 0) {
+          resultDiv.innerHTML += `${count} of ฿${denominations[i]}<br>`;
+          amount %= denominations[i];
+        }
+      }
+    }
+  </script>
+</body>
+</html>

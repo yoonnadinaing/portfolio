@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradeAssignment</title>
+    <style>
+        body{
+            background-color: rgb(131, 109, 109);
+            text-align: center;
+        }
+
+        .container{
+            background-color: rgb(86, 63, 63);
+            padding: 30px;
+           width: 50%;
+           margin: 0 auto;
+           border-radius: 10px;
+        }
+        p{
+            color: aliceblue;
+        }
+        input{
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Grade Assignment</h1>
+
+    <div class="container">
+        <input type="number" id="grade" placeholder="Enter your score..">
+        <br>
+        <button onclick="CalculateGrade()">Submit</button>
+        <p id="result">Your grade is here..</p>
+    </div>
+
+    <a href="javascript:history.back()" class="back-button">⬅ Back</a>
+    
+    <script>
+        function CalculateGrade(){
+            const num = document.getElementById("grade").value
+            if (num < 0 || num > 100 ) {
+                window.alert("Enter a valid score")
+                return
+            }
+            grade;
+            if (num >= 90) {
+                grade = "A"
+            } else if (num >= 80) {
+                grade = 'B'
+            } else if (num >= 70) {
+                grade = 'C'
+            } else if (num >= 60) {
+                grade = 'D'
+            } else {
+                grade = 'F'
+            }
+            const ptag = document.getElementById('result')
+            ptag.innerHTML = `Your grade is ${grade}`
+        }
+    </script>
+</body>
+</html>
